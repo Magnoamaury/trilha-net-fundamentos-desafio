@@ -3,23 +3,38 @@
 // Coloca o encoding para UTF8 para exibir acentuação
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-decimal precoInicial = 0;
-decimal precoPorHora = 0;
+//USUÁRIO INSERE PREÇO INICIAL DA COBRANÇA
+Console.WriteLine("SEJA BEM VINDO AO SISTEMA DE ESTACIONAMENTO!!!");
 
-Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
-                  "Digite o preço inicial:");
-precoInicial = Convert.ToDecimal(Console.ReadLine());
+decimal precoInicial = -1;
+while (precoInicial < 0)
+{
+    Console.WriteLine("Digite o preço inicial: ");
+    precoInicial = decimal.Parse(Console.ReadLine());
+    if (precoInicial < 0)
+    {
+        Console.WriteLine("Preço não pode ser menor que zero!!");
+    }
+}
 
-Console.WriteLine("Agora digite o preço por hora:");
-precoPorHora = Convert.ToDecimal(Console.ReadLine());
+//USUÁRIO INSERE PREÇO POR HORA DA COBRANÇA
+decimal precoPorHora = -1;
+while (precoPorHora < 0)
+{
+    Console.WriteLine("Agora digite o preço por hora: ");
+    precoPorHora = decimal.Parse(Console.ReadLine());
+    if (precoPorHora < 0)
+    {
+        Console.WriteLine("Preço não pode ser menor que zero!!");
+    }
+}
 
-// Instancia a classe Estacionamento, já com os valores obtidos anteriormente
-Estacionamento es = new Estacionamento(precoInicial, precoPorHora);
+//CLASSE É ESTANCIADA
+Estacionamento e1 = new Estacionamento(precoInicial, precoPorHora);
 
-string opcao = string.Empty;
 bool exibirMenu = true;
 
-// Realiza o loop do menu
+//O MENU É INICIADO
 while (exibirMenu)
 {
     Console.Clear();
@@ -29,18 +44,19 @@ while (exibirMenu)
     Console.WriteLine("3 - Listar veículos");
     Console.WriteLine("4 - Encerrar");
 
+
     switch (Console.ReadLine())
     {
         case "1":
-            es.AdicionarVeiculo();
+            e1.AdicionarVeiculo();
             break;
 
         case "2":
-            es.RemoverVeiculo();
+            e1.RemoverVeiculo();
             break;
 
         case "3":
-            es.ListarVeiculos();
+            e1.ListarVeiculos();
             break;
 
         case "4":
@@ -50,10 +66,8 @@ while (exibirMenu)
         default:
             Console.WriteLine("Opção inválida");
             break;
-    }
 
-    Console.WriteLine("Pressione uma tecla para continuar");
+    }
+    Console.WriteLine("Pressione enter para continuar");
     Console.ReadLine();
 }
-
-Console.WriteLine("O programa se encerrou");
